@@ -1,10 +1,24 @@
-#Semana 2 - Creación masiva de usuarios
-$usuarios = Get-Content "usuarios.csv"
+#Semana-2:Creacion Masiva de usuarios
+#Obtiene la ruta de la carpeta donde está guardado este script
+$rutaScript = System.IO.Path::GetDirectoryName($MyInvocation.MyCommand.Path)
+$archivo = Join-Path $rutaScript "usuarios.txt"
 
-foreach ($user in $usuarios) {
-    New-LocalUser -Name $user -NoPassword
-    Add-LocalGroupMember -Group "Users" -Member $user
-    Write-Host "Usuario $user creado." -ForegroundColor Green
+# Ahora verificamos si existe en esa ruta específica
+if (Test-Path $archivo) {
+    $listaUsuarios = Get-Content $archivo
+    Write-Host "Archivo encontrado. Procesando usuarios..." -ForegroundColor Cyan
+    
+    foreach ($nombre in $listaUsuarios) {
+        if (-not (Get-LocalUser -Name $nombre -ErrorAction SilentlyContinue)) {
+            New-LocalUser -Name $nombre -NoPassword
+            Write-Host "[OK] Usuario '$nombre' creado." -ForegroundColor Green
+        } else {
+            Write-Host "[!] El usuario '$nombre' ya existe." -ForegroundColor Yellow
+        }
+    }
+} else {
+    Write-Host "[ERROR] No se encuentra el archivo en: $archivo" -ForegroundColor Red
 }
-# Pausa para ver el resultado
-Read-Host "`nPresiona Enter para finalizar"
+
+Write-Host "`nPresiona Enter para finalizar..."
+Read-Host
