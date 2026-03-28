@@ -1,12 +1,12 @@
 #Semana-2: Creacion masiva de usuarios
-# Forma nativa de PowerShell para encontrar la carpeta del script
 $rutaScript = $PSScriptRoot
-$archivo = "$rutaScript\usuarios.txt"
 
-# Verificación
-if (Test-Path $archivo) {
-    Write-Host "Archivo encontrado en: $archivo" -ForegroundColor Cyan
-    $listaUsuarios = Get-Content $archivo
+# Buscamos cualquier archivo que se llame usuarios (sea .txt o .csv)
+$archivo = Get-ChildItem -Path $rutaScript -Filter "usuarios*" | Select-Object -First 1
+
+if ($archivo) {
+    Write-Host "[OK] Leyendo archivo: $($archivo.FullName)" -ForegroundColor Cyan
+    $listaUsuarios = Get-Content $archivo.FullName
     
     foreach ($nombre in $listaUsuarios) {
         if (-not (Get-LocalUser -Name $nombre -ErrorAction SilentlyContinue)) {
@@ -17,7 +17,7 @@ if (Test-Path $archivo) {
         }
     }
 } else {
-    Write-Host "[ERROR] No se encuentra 'usuarios.txt' en la carpeta: $rutaScript" -ForegroundColor Red
+    Write-Host "[ERROR] No hay ningún archivo que empiece por 'usuarios' en: $rutaScript" -ForegroundColor Red
 }
 
 Read-Host "`nPresiona Enter para finalizar"
