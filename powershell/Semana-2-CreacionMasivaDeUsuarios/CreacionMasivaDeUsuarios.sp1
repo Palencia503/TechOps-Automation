@@ -1,0 +1,10 @@
+#Semana 2 - Creación masiva de usuarios
+$usuarios = Get-Content "usuarios.csv"
+
+foreach ($user in $usuarios) {
+    New-LocalUser -Name $user -NoPassword
+    Add-LocalGroupMember -Group "Users" -Member $user
+    Write-Host "Usuario $user creado." -ForegroundColor Green
+}
+# Pausa para ver el resultado
+Read-Host "`nPresiona Enter para finalizar"
