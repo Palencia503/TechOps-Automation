@@ -1,3 +1,4 @@
+#Semana-2: Creacion masiva de usuarios
 # Forma nativa de PowerShell para encontrar la carpeta del script
 $rutaScript = $PSScriptRoot
 $archivo = "$rutaScript\usuarios.txt"
