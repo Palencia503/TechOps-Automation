@@ -1,5 +1,5 @@
 #!/bin/bash
-# Semana 2 - Creación masiva de usuarios
+#Semana 2 - Creación masiva de usuarios
 input="usuarios.csv"
 
 while IFS= read -r user
