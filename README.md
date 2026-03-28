@@ -1,6 +1,6 @@
-# TechOps-Automation
-## Proyecto de Automatización TechOps Solutions (PAC-7)
-Este repositorio contiene los scripts de automatización desarrollados durante las 5 semanas de formación en TechOps Solutions. El objetivo es optimizar la gestión de sistemas mediante Bash (Ubuntu) y PowerShell (Windows).
+# Automatización
+## Proyecto de Automatización (PAC-7)
+Este repositorio contiene los scripts de automatización desarrollados durante las 5 semanas. El objetivo es optimizar la gestión de sistemas mediante Bash (Ubuntu) y PowerShell (Windows).
 
 📂 Estructura del Repositorio
 El proyecto está organizado por entornos y semanas para facilitar la localización de los scripts:
